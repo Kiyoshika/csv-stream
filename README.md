@@ -13,14 +13,14 @@ To make data processing easier for my algorithms, I want a relatively lightwight
 # Building
 In the root directory run `make` which will compile the library into a static library located in the `lib/` directory.
 
-Run `make test` to run all the tests to validate everythign is working.
+Run `make test` to run all the tests to validate everything is working.
 
 # Including in other projects
 There is currently no global install target for this project (yet?) so the process is a bit manual at the moment...
 
 To include this project in your own C/C++ projects, you can:
 1. add this repo as a submodule `git submodule add git@github.com:Kiyoshika/csv-stream.git`
-2. `cd csv-stream` and run `make` to build the library
+2. `cd csv-stream` and run `make` to build the library (it's recommended to make this step a part of your build process for your project)
 3. in your own `Makefile` add the following additional flags:
 	* `-Icsv-stream/include` to your include flag
 	* `-Lcsv-stream/lib` to your link directory flag
