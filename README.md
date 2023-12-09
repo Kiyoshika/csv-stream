@@ -1,5 +1,5 @@
 # CSV Stream
-This is a data processing library to fully or partially stream CSV files with the.
+This is a data processing library to fully or partially stream CSV files.
 
 ## Motivation
 Why am I building this?
@@ -19,11 +19,15 @@ Run `make test` to run all the tests to validate everythign is working.
 There is currently no global install target for this project (yet?) so the process is a bit manual at the moment...
 
 To include this project in your own C/C++ projects, you can:
-1. add this repo as a submodule `git submodule add [path-to-this-repo]`
+1. add this repo as a submodule `git submodule add git@github.com:Kiyoshika/csv-stream.git`
 2. `cd csv-stream` and run `make` to build the library
 3. in your own `Makefile` add the following additional flags:
 	* `-Icsv-stream/include` to your include flag
 	* `-Lcsv-stream/lib` to your link directory flag
 	* `-lcstream` to your link flag
+4. OR if you use CMake, the following should work (hopefully):
+   	* `target_include_directories([your target] PUBLIC csv-stream/include)`
+   	* `target_link_directories([your target] PUBLIC csv-stream/lib)`
+   	* `target_link_libraries([your target] cstream)`
 
 Now you can use `#include "cstream.h"` in your project.
