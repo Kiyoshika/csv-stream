@@ -1,5 +1,7 @@
 CC := gcc
 
+C_STD := -std=c99
+
 SRC_DIR := src
 INCLUDE_DIR := include
 
@@ -27,13 +29,16 @@ CFLAGS=$(CFLAGS_RELEASE)
 endif
 
 build:
-	@$(CC) -std=c99 -c $(SRC_DIR)/* $(INCLUDE_FLAGS) $(LINK_FLAGS)
+	@$(CC) $(C_STD) -c $(SRC_DIR)/* $(INCLUDE_FLAGS) $(LINK_FLAGS)
 	@ar -crs libcstream.a *.o
 	@mv libcstream.a $(LIB_DIR)/libcstream.a
 	@rm *.o
 
+COMMON_TEST_OPTIONS := $(INCLUDE_FLAGS) -L$(LIB_DIR) $(TEST_LINK_FLAGS)
 TEST_DIR := tests
+test: build test-cell
+
 TEST_CELL_DIR := $(TEST_DIR)/cell
-test: build
-	@$(CC) -std=c99 -o test_cell_int_conversions $(TEST_CELL_DIR)/int_conversions.c $(INCLUDE_FLAGS) -L$(LIB_DIR) $(TEST_LINK_FLAGS)
+test-cell: build
+	@$(CC) $(C_STD) -o test_cell_int_conversions $(TEST_CELL_DIR)/int_conversions.c $(COMMON_TEST_OPTIONS)
 	./test_cell_int_conversions
