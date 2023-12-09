@@ -1,0 +1,7 @@
+# ignore compiled library
+*.a
+# vim
+*.swo*
+*.swp*
+# ignore all test executables
+test_*
