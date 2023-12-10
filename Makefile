@@ -34,11 +34,15 @@ build:
 	@mv libcstream.a $(LIB_DIR)/libcstream.a
 	@rm *.o
 
+# view all TODO comments in the project
+todo:
+	grep TODO -r . --exclude Makefile
+
 COMMON_TEST_OPTIONS := $(INCLUDE_FLAGS) -L$(LIB_DIR) $(TEST_LINK_FLAGS)
 TEST_DIR := tests
 test: build test-cell
 
 TEST_CELL_DIR := $(TEST_DIR)/cell
 test-cell: build
-	@$(CC) $(C_STD) -o $(TEST_CELL_DIR)/test_cell_int_conversions $(TEST_CELL_DIR)/int_conversions.c $(COMMON_TEST_OPTIONS)
-	./$(TEST_CELL_DIR)/test_cell_int_conversions
+	@$(CC) $(C_STD) -o $(TEST_CELL_DIR)/test_cell_conversions $(TEST_CELL_DIR)/conversions.c $(COMMON_TEST_OPTIONS)
+	./$(TEST_CELL_DIR)/test_cell_conversions

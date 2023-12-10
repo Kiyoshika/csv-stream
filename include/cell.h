@@ -27,7 +27,6 @@ enum cstream_cell_type_e {
 // Value will be heap allocated once during the initialization of
 // cstream_init().
 struct cstream_cell_t {
-  bool is_null;
   enum cstream_cell_type_e type;
   char *value;
 };
@@ -70,12 +69,14 @@ cstream_cell_set_int64(
   const bool write_to_file);
 
 // Set the value of the cell to a decimal value.
+// Specify the precision to save (this controls how much memory to allocate).
 // If write_to_file is true, writes the new value to the
 // original file.
 void
 cstream_cell_set_decimal(
   struct cstream_cell_t* cell,
   const double value,
+  const size_t precision,
   const bool write_to_file);
 
 // Set the value of the cell to a string value.
@@ -85,6 +86,12 @@ void
 cstream_cell_set_string(
   struct cstream_cell_t* cell,
   const char* value,
+  const bool write_to_file);
+
+// Set the value to null.
+void
+cstream_cell_set_null(
+  struct cstream_cell_t* cell,
   const bool write_to_file);
 
 #endif
