@@ -34,6 +34,9 @@ build:
 	@mv libcstream.a $(LIB_DIR)/libcstream.a
 	@rm *.o
 
+format:
+	./format.sh
+
 # view all TODO comments in the project
 todo:
 	grep TODO -r . --exclude Makefile

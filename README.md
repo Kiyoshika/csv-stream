@@ -17,6 +17,8 @@ Run `make test` to run all the tests to validate everything is working.
 
 There's also `make todo` to grab all the `TODO` comments within the codebase with `grep`.
 
+If you have `clang-format` installed, run `make format` to format all the source files.
+
 # Including in other projects
 There is currently no global install target for this project (yet?) so the process is a bit manual at the moment...
 
