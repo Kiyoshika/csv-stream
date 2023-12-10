@@ -1,8 +1,6 @@
 #include "cell.h"
+#include "log.h"
 #include <assert.h>
-
-#define RESET   "\033[0m"
-#define GREEN   "\033[32m"
 
 int main() {
   struct cstream_cell_t cell;
@@ -48,6 +46,6 @@ int main() {
   cstream_cell_set_null(&cell, false);
   assert(cstream_cell_isnull(&cell) == true);
 
-  printf(GREEN "tests/cell/conversions.c --- All assertions passed.\n" RESET);
+  LOG_OK("tests/cell/conversions.c --- All assertions passed.");
   return 0;
 }

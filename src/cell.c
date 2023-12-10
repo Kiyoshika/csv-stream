@@ -1,8 +1,9 @@
 #include "cell.h"
+#include "log.h"
 
 #define CHECK_CELL_PTR(func_name, return_value) { \
   if (!cell) { \
-    fprintf(stderr, "%s: WARNING: cell is a NULL pointer.\n", func_name); \
+    fprintf(stderr, YELLOW "%s: WARNING: cell is a NULL pointer.\n" RESET, func_name); \
     return return_value; \
   } \
 }
@@ -18,7 +19,6 @@
  } \
 }
 
-
 bool
 cstream_cell_init(
   struct cstream_cell_t* cell) {
@@ -27,7 +27,7 @@ cstream_cell_init(
   char* value = calloc(10, sizeof(char));
 
   if (!value) {
-    fprintf(stderr, "cstream_cell_init: WARNING: value could not be allocated and is NULL.\n");
+    LOG_WARNING("cstream_cell_init", "value could not be allocated and is NULL.");
     return false;
   }
 
@@ -98,7 +98,7 @@ cstream_cell_set_int64(
 
   char* value_str = calloc(value_len, sizeof(char));
   if (!value_str) {
-    fprintf(stderr, "cstream_cell_set_int64: WARNING: couldn't allocate memory for value; returned early.\n");
+    LOG_WARNING("cstream_cell_set_int64", "couldn't allocate memory for value.");
     return;
   }
   snprintf(value_str, value_len, "%lld", value);
@@ -128,7 +128,7 @@ cstream_cell_set_decimal(
 
   char* value_str = calloc(value_len, sizeof(char));
   if (!value_str) {
-    fprintf(stderr, "cstream_cell_set_decimal: WARNING: couldn't allocate memory for value; returned early.\n");
+    LOG_WARNING("cstream_cell_set_decimal", "couldn't allocate memory for value.");
     return;
   }
   snprintf(value_str, value_len, "%f", value);
@@ -148,7 +148,7 @@ cstream_cell_set_string(
 
   char* value_str = strdup(value);
   if (!value_str) {
-    fprintf(stderr, "cstream_cell_set_string: WARNING: couldn't allocate memory for value; returned early.\n");
+    LOG_WARNING("cstream_cell_set_string", "couldn't allocate memory for value.");
     return;
   }
 

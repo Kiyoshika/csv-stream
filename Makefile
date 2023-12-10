@@ -40,9 +40,14 @@ todo:
 
 COMMON_TEST_OPTIONS := $(INCLUDE_FLAGS) -L$(LIB_DIR) $(TEST_LINK_FLAGS)
 TEST_DIR := tests
-test: build test-cell
+test: build test-cell test-cstream
 
 TEST_CELL_DIR := $(TEST_DIR)/cell
 test-cell: build
 	@$(CC) $(C_STD) -o $(TEST_CELL_DIR)/test_cell_conversions $(TEST_CELL_DIR)/conversions.c $(COMMON_TEST_OPTIONS)
 	./$(TEST_CELL_DIR)/test_cell_conversions
+
+TEST_CSTREAM_DIR := $(TEST_DIR)/cstream
+test-cstream: build
+	@$(CC) $(C_STD) -o $(TEST_CSTREAM_DIR)/test_full_stream $(TEST_CSTREAM_DIR)/full_stream.c $(COMMON_TEST_OPTIONS)
+	./$(TEST_CSTREAM_DIR)/test_full_stream

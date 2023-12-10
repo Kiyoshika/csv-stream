@@ -1,4 +1,5 @@
 #include "options.h"
+#include "log.h"
 
 struct cstream_options_t
 cstream_options_init() {
@@ -14,11 +15,11 @@ cstream_options_set_null_text(
   struct cstream_options_t* options,
   const char* null_text) {
   if (!options) {
-    fprintf(stderr, "cstream_options_set_null_text: WARNING: options is a NULL pointer; ignored.\n");
+    LOG_WARNING("cstream_options_set_null_text", "options is a NULL pointer.");
     return;
   }
   if (!null_text) {
-    fprintf(stderr, "cstream_options_set_null_text: WARNING: null_text is a NULL pointer; ignored.\n");
+    LOG_WARNING("cstream_options_set_null_text", "null_text is a NULL pointer.");
     return;
   }
   memset(options->null_text, 0, CSTREAM_NULL_TEXT_LEN);
@@ -30,7 +31,7 @@ cstream_options_set_delimiter(
   struct cstream_options_t* options,
   const char delimiter) {
   if (!options) {
-    fprintf(stderr, "cstream_options_set_delimiter: WARNING: passed a NULL pointer; ignored.\n");
+    LOG_WARNING("cstream_options_set_delimiter", "passed a NULL pointer; ignored.");
     return;
   }
   options->delimiter = (char)delimiter;
@@ -41,7 +42,7 @@ cstream_options_set_header(
   struct cstream_options_t* options,
   const bool has_header) {
   if (!options) {
-    fprintf(stderr, "cstream_options_set_header: WARNING: options is a NULL pointer; ignored.\n");
+    LOG_WARNING("cstream_options_set_header", "options is a NULL pointer; ignored.");
     return;
   }
 }
