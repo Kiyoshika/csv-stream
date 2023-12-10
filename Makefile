@@ -40,5 +40,5 @@ test: build test-cell
 
 TEST_CELL_DIR := $(TEST_DIR)/cell
 test-cell: build
-	@$(CC) $(C_STD) -o test_cell_int_conversions $(TEST_CELL_DIR)/int_conversions.c $(COMMON_TEST_OPTIONS)
-	./test_cell_int_conversions
+	@$(CC) $(C_STD) -o $(TEST_CELL_DIR)/test_cell_int_conversions $(TEST_CELL_DIR)/int_conversions.c $(COMMON_TEST_OPTIONS)
+	./$(TEST_CELL_DIR)/test_cell_int_conversions
