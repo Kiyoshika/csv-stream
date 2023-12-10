@@ -58,9 +58,19 @@ struct cstream_cell_t*
 cstream_next_column(
 	struct cstream_t* stream);
 
+// Close the stream that was opened with either cstream_open_full()
+// or cstream_open_partial().
 void
 cstream_close(
 	struct cstream_t* stream);
+
+// Get the current row content as a string.
+// DO NOT free this pointer yourself.
+const char*
+cstream_get_row_content(
+	const struct cstream_t* stream);
+
+// TODO: implement free function
 
 #endif
 

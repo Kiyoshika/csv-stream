@@ -1,12 +1,17 @@
 #include "cstream.h"
+#include "log.h"
+
+#define CHECK_STREAM_PTR(func_name, return_value) { \
+	if (!stream) { \
+		LOG_WARNING(func_name, "stream is a NULL pointer."); \
+		return return_value; \
+	} \
+}
 
 bool
 cstream_init(
   struct cstream_t* stream) {
-  if (!stream) {
-    fprintf(stderr, "cstream_init: WARNING: stream is a NULL pointer; ignored.\n");
-    return false;
-  }
+  CHECK_STREAM_PTR("cstream_init", false); 
 
   struct cstream_file_row_t row = {
 	  .content = NULL,
@@ -20,7 +25,7 @@ cstream_init(
 
   struct cstream_cell_t cell;
   if (!cstream_cell_init(&cell)) {
-    fprintf(stderr, "cstream_init: WARNING: creating cell failed.\n");
+	LOG_WARNING("cstream_init", "creating cell failed.");
     return false;
   }
 
@@ -39,8 +44,6 @@ cstream_open_full(
 	struct cstream_t* stream,
 	const char* filepath) {
 
-	char delim = stream->options.delimiter;
-
 	cstream_file_open(stream, filepath);
 
 	// skip header
@@ -52,15 +55,13 @@ cstream_open_full(
 bool
 cstream_next_row(
 	struct cstream_t* stream) {
-	int read = cstream_file_readline(stream);
-	printf("ROW: %s\n", stream->file.current_row.content);
-	return read != -1;
+	return cstream_file_readline(stream) != -1;
 }
 
 struct cstream_cell_t*
 cstream_next_column(
 	struct cstream_t* stream) {
-	// TODO:
+	// TODO: implement this
 	return NULL;
 }
 
@@ -68,4 +69,18 @@ void
 cstream_close(
 	struct cstream_t* stream) {
 	cstream_file_close(stream);
+}
+
+const char*
+cstream_get_row_content(
+	const struct cstream_t* stream) {
+	CHECK_STREAM_PTR("cstream_get_row_content", NULL);
+	return stream->file.current_row.content;
+}
+
+const char*
+cstream_get_cell_content(
+	const struct cstream_t* stream) {
+	CHECK_STREAM_PTR("cstream_get_cell_content", NULL);
+	return stream->cell.value;
 }
