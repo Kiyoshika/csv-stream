@@ -15,6 +15,8 @@ In the root directory run `make` which will compile the library into a static li
 
 Run `make test` to run all the tests to validate everything is working.
 
+There's also `make todo` to grab all the `TODO` comments within the codebase with `grep`.
+
 # Including in other projects
 There is currently no global install target for this project (yet?) so the process is a bit manual at the moment...
 
